@@ -3,7 +3,7 @@
 use App\User;
 use Illuminate\Database\Seeder;
 
-class UsersSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +16,9 @@ class UsersSeeder extends Seeder
 
         factory(User::class)
             ->create([
-                'name' => 'John Doe',
-                'email' => 'john@example.com',
+                'name' => 'Najibu',
+                'email' => 'najibu@example.com',
+                'password' => bcrypt('password')
             ]);
     }
 }
