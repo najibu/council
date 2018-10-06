@@ -1,0 +1,28 @@
+# Forum 
+
+## 1 Setup
+1. Thread
+2. Reply
+3. User 
+
+A. Thread is created by a user.
+B. A reply belongs to a thread, and belongs to a user. 
+
+# tinker creating threads and replies
+$threads = factory(‘App\Thread’, 50)->create();
+$threads->each(function($thread){ factory(‘App\Reply’, 10)->create([’thread_id’ => $thread->id]); });
+
+## 2 Test Driving threads
+First small feature: "a user should be able to read threads." Simple enough! We'll start with a basic test, and then scaffold the necessary views to make it pass.
+
+## 3 A Thread Can Have Replies
+ Given we have a thread
+ And that thread includes replies
+ When we visit a thread page
+ Then we should see the replies.
+
+an_authenticated_user_may_participate_in_forum_threads
+Given we have an authenitcated user 
+And an existing thread
+When the user adds a reply to the thread
+Then their reply should be included on the page.
