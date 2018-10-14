@@ -5149,38 +5149,11 @@ module.exports = baseIteratee;
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var arrayLikeKeys = __webpack_require__(93),
     baseKeys = __webpack_require__(95),
-    isArrayLike = __webpack_require__(10);
+    isArrayLike = __webpack_require__(9);
 
 /**
  * Creates an array of the own enumerable property names of `object`.
@@ -5218,7 +5191,7 @@ module.exports = keys;
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isFunction = __webpack_require__(19),
@@ -5254,6 +5227,33 @@ function isArrayLike(value) {
 }
 
 module.exports = isArrayLike;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -6153,7 +6153,7 @@ module.exports = baseIndexOf;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseFor = __webpack_require__(107),
-    keys = __webpack_require__(9);
+    keys = __webpack_require__(8);
 
 /**
  * The base implementation of `_.forOwn` without support for iteratee shorthands.
@@ -6363,7 +6363,7 @@ module.exports = baseAssignValue;
 
 var arrayLikeKeys = __webpack_require__(93),
     baseKeysIn = __webpack_require__(385),
-    isArrayLike = __webpack_require__(10);
+    isArrayLike = __webpack_require__(9);
 
 /**
  * Creates an array of the own and inherited enumerable property names of `object`.
@@ -6445,7 +6445,7 @@ var baseKeys = __webpack_require__(95),
     getTag = __webpack_require__(35),
     isArguments = __webpack_require__(29),
     isArray = __webpack_require__(1),
-    isArrayLike = __webpack_require__(10),
+    isArrayLike = __webpack_require__(9),
     isBuffer = __webpack_require__(30),
     isPrototype = __webpack_require__(49),
     isTypedArray = __webpack_require__(48);
@@ -7327,7 +7327,7 @@ module.exports = createCtor;
 "use strict";
 
 
-var keys = __webpack_require__(9);
+var keys = __webpack_require__(8);
 var intersection = __webpack_require__(320);
 var forOwn = __webpack_require__(350);
 var forEach = __webpack_require__(22);
@@ -20829,7 +20829,7 @@ var freeGlobal = typeof global == 'object' && global && global.Object === Object
 
 module.exports = freeGlobal;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
 /* 95 */
@@ -21163,7 +21163,7 @@ module.exports = shortOut;
 /* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArrayLike = __webpack_require__(10),
+var isArrayLike = __webpack_require__(9),
     isObjectLike = __webpack_require__(3);
 
 /**
@@ -21378,7 +21378,7 @@ module.exports = Uint8Array;
 
 var baseGetAllKeys = __webpack_require__(113),
     getSymbols = __webpack_require__(73),
-    keys = __webpack_require__(9);
+    keys = __webpack_require__(8);
 
 /**
  * Creates an array of own enumerable property names and symbols of `object`.
@@ -21593,7 +21593,7 @@ module.exports = hasIn;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseEach = __webpack_require__(54),
-    isArrayLike = __webpack_require__(10);
+    isArrayLike = __webpack_require__(9);
 
 /**
  * The base implementation of `_.map` without support for iteratee shorthands.
@@ -22104,7 +22104,7 @@ module.exports = trim;
 /***/ (function(module, exports, __webpack_require__) {
 
 var eq = __webpack_require__(20),
-    isArrayLike = __webpack_require__(10),
+    isArrayLike = __webpack_require__(9),
     isIndex = __webpack_require__(31),
     isObject = __webpack_require__(4);
 
@@ -24074,7 +24074,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(28)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(28)))
 
 /***/ }),
 /* 152 */
@@ -24648,18 +24648,15 @@ module.exports = '2.26.1';
 /* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !== "undefined" && global) ||
-            (typeof self !== "undefined" && self) ||
-            window;
 var apply = Function.prototype.apply;
 
 // DOM APIs, for completeness
 
 exports.setTimeout = function() {
-  return new Timeout(apply.call(setTimeout, scope, arguments), clearTimeout);
+  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
 };
 exports.setInterval = function() {
-  return new Timeout(apply.call(setInterval, scope, arguments), clearInterval);
+  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
 };
 exports.clearTimeout =
 exports.clearInterval = function(timeout) {
@@ -24674,7 +24671,7 @@ function Timeout(id, clearFn) {
 }
 Timeout.prototype.unref = Timeout.prototype.ref = function() {};
 Timeout.prototype.close = function() {
-  this._clearFn.call(scope, this._id);
+  this._clearFn.call(window, this._id);
 };
 
 // Does not start the time, just sets up the members needed.
@@ -24702,17 +24699,9 @@ exports._unrefActive = exports.active = function(item) {
 
 // setimmediate attaches itself to the global object
 __webpack_require__(472);
-// On some exotic environments, it's not clear which object `setimmediate` was
-// able to install onto.  Search each possibility in the same order as the
-// `setimmediate` library.
-exports.setImmediate = (typeof self !== "undefined" && self.setImmediate) ||
-                       (typeof global !== "undefined" && global.setImmediate) ||
-                       (this && this.setImmediate);
-exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
-                         (typeof global !== "undefined" && global.clearImmediate) ||
-                         (this && this.clearImmediate);
+exports.setImmediate = setImmediate;
+exports.clearImmediate = clearImmediate;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
 /* 158 */
@@ -54043,7 +54032,7 @@ window.flash = function (message) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(27)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(27)(module)))
 
 /***/ }),
 /* 290 */
@@ -58022,7 +58011,7 @@ function cleanup() {
   }
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
 /* 301 */
@@ -58648,7 +58637,7 @@ if (typeof window !== "undefined") {
 
 module.exports = win;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10)))
 
 /***/ }),
 /* 305 */
@@ -59838,7 +59827,7 @@ return Promise$1;
 
 //# sourceMappingURL=es6-promise.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28), __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(28), __webpack_require__(10)))
 
 /***/ }),
 /* 306 */
@@ -62808,7 +62797,7 @@ module.exports = createBaseFor;
 /* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isArrayLike = __webpack_require__(10);
+var isArrayLike = __webpack_require__(9);
 
 /**
  * Creates a `baseEach` or `baseEachRight` function.
@@ -63513,7 +63502,7 @@ module.exports = Set;
 /***/ (function(module, exports, __webpack_require__) {
 
 var isStrictComparable = __webpack_require__(116),
-    keys = __webpack_require__(9);
+    keys = __webpack_require__(8);
 
 /**
  * Gets the property names, values, and compare flags of `object`.
@@ -63950,7 +63939,7 @@ var Stack = __webpack_require__(55),
     isMap = __webpack_require__(394),
     isObject = __webpack_require__(4),
     isSet = __webpack_require__(396),
-    keys = __webpack_require__(9);
+    keys = __webpack_require__(8);
 
 /** Used to compose bitmasks for cloning. */
 var CLONE_DEEP_FLAG = 1,
@@ -64108,7 +64097,7 @@ module.exports = baseClone;
 /***/ (function(module, exports, __webpack_require__) {
 
 var copyObject = __webpack_require__(25),
-    keys = __webpack_require__(9);
+    keys = __webpack_require__(8);
 
 /**
  * The base implementation of `_.assign` without support for multiple sources
@@ -64906,8 +64895,8 @@ module.exports = isEqual;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIteratee = __webpack_require__(7),
-    isArrayLike = __webpack_require__(10),
-    keys = __webpack_require__(9);
+    isArrayLike = __webpack_require__(9),
+    keys = __webpack_require__(8);
 
 /**
  * Creates a `_.find` or `_.findLast` function.
@@ -65723,7 +65712,7 @@ module.exports = baseSum;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseIndexOf = __webpack_require__(33),
-    isArrayLike = __webpack_require__(10),
+    isArrayLike = __webpack_require__(9),
     isString = __webpack_require__(42),
     toInteger = __webpack_require__(40),
     values = __webpack_require__(426);
@@ -65782,7 +65771,7 @@ module.exports = includes;
 /***/ (function(module, exports, __webpack_require__) {
 
 var baseValues = __webpack_require__(427),
-    keys = __webpack_require__(9);
+    keys = __webpack_require__(8);
 
 /**
  * Creates an array of the own enumerable string keyed property values of `object`.
@@ -67510,7 +67499,7 @@ module.exports = requestBuilder;
 
 
 var invert = __webpack_require__(154);
-var keys = __webpack_require__(9);
+var keys = __webpack_require__(8);
 
 var keys2Short = {
   advancedSyntax: 'aS',
@@ -81702,7 +81691,7 @@ Vue.compile = compileToFunctions;
 
 module.exports = Vue;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(157).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(157).setImmediate))
 
 /***/ }),
 /* 472 */
@@ -81895,7 +81884,7 @@ module.exports = Vue;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(28)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(10), __webpack_require__(28)))
 
 /***/ }),
 /* 473 */
@@ -83693,6 +83682,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -83715,6 +83708,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.authorize(function (user) {
                 return user.id === _this.user.id;
             });
+        },
+        reputation: function reputation() {
+            return this.user.reputation + 'XP';
         }
     },
 
@@ -83854,7 +83850,10 @@ var render = function() {
         attrs: { src: _vm.avatar, width: "50", height: "50" }
       }),
       _vm._v(" "),
-      _c("h1", { domProps: { textContent: _vm._s(_vm.user.name) } })
+      _c("h1", [
+        _vm._v("\n            " + _vm._s(_vm.user.name) + "\n            "),
+        _c("small", { domProps: { textContent: _vm._s(_vm.reputation) } })
+      ])
     ]),
     _vm._v(" "),
     _vm.canUpdate
