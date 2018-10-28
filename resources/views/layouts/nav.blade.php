@@ -64,6 +64,14 @@
                 @else
                     <user-notifications></user-notifications>
 
+                    @if (Auth::user()->isAdmin)
+                        <li>
+                            <a href="/admin">
+                                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    @endif
+
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             {{ Auth::user()->name }} <span class="caret"></span>

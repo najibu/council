@@ -11,6 +11,15 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+     * The accessor to append to the model's array form
+     *
+     * @var array
+     */
+    protected $appends = [
+        'isAdmin'
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -82,7 +91,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return in_array($this->name, ['Najibu', 'Nsubuga']);
+        return in_array($this->email, config('council.adminstrators'));
     }
 
     /**
@@ -96,6 +105,16 @@ class User extends Authenticatable
             $this->visitedThreadCacheKey($thread),
             Carbon::now()
         );
+    }
+
+    /**
+     * Determine if the user is an adminstrator
+     *
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return $this->isAdmin();
     }
 
     /**
