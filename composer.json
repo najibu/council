@@ -7,7 +7,6 @@
     "require": {
         "php": ">=5.6.4",
         "algolia/algoliasearch-client-php": "^1.27",
-        "barryvdh/laravel-debugbar": "^2.3",
         "kitetail/zttp": "^0.3.0",
         "laravel/framework": "5.5.*",
         "laravel/scout": "^5.0",
@@ -18,7 +17,8 @@
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~6.0"
+        "phpunit/phpunit": "~6.0",
+        "barryvdh/laravel-debugbar": "^2.3",
     },
     "autoload": {
         "classmap": [
