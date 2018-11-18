@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\admin;
+namespace Tests\Feature\Admin;
 
 use App\Channel;
 use App\User;
@@ -22,19 +22,15 @@ class ChannelAdminstrationTest extends TestCase
     /** @test  */
     public function an_administrator_can_access_the_channel_administration_section()
     {
-        $adminstrator = factory('App\User')->create();
-        config(['council.adminstrators' => [ $adminstrator->email ]]);
-        $this->signIn($adminstrator);
-
-        $this->actingAs($adminstrator)
-            ->get('/admin/channels')
+        $this->signInAdmin()
+            ->get(route('admin.channels.index'))
             ->assertStatus(Response::HTTP_OK);
     }
 
     /** @test  */
     public function a_non_adminstrator_cannot_access_the_channel_adminstration_section()
     {
-        $regularUser = factory(User::class)->create();
+        $regularUser = create(User::class);
 
         $this->actingAs($regularUser)
             ->get(route('admin.channels.index'))
@@ -73,9 +69,7 @@ class ChannelAdminstrationTest extends TestCase
 
     protected function createChannel($overrides = [])
     {
-        $adminstrator = factory('App\User')->create();
-        config(['council.adminstrators' => [ $adminstrator->email ]]);
-        $this->signIn($adminstrator);
+        $this->signInAdmin();
 
         $channel = make(Channel::class, $overrides);
 
