@@ -1,4 +1,5 @@
-# Council
+# Council [![Build Status](https://travis-ci.com/najibu/council.svg?branch=master)](https://travis-ci.com/najibu/council)
+
 
 This is an open source forum.
 
