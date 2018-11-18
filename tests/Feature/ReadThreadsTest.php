@@ -3,10 +3,9 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class ThreadsTest extends TestCase
+class ReadThreadsTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -38,7 +37,7 @@ class ThreadsTest extends TestCase
         $threadInChannel = create('App\Thread', ['channel_id' => $channel->id]);
         $threadNotInChannel = create('App\Thread');
 
-        $this->get('/threads/' . $channel->slug)
+        $this->get('/threads/'.$channel->slug)
             ->assertSee($threadInChannel->title)
             ->assertDontSee($threadNotInChannel->title);
     }
@@ -92,7 +91,7 @@ class ThreadsTest extends TestCase
         $thread = create('App\Thread');
         create('App\Reply', ['thread_id' => $thread->id], 2);
 
-        $response = $this->getJson($thread->path() . '/replies')->json();
+        $response = $this->getJson($thread->path().'/replies')->json();
 
         $this->assertCount(2, $response['data']);
         $this->assertEquals(2, $response['total']);

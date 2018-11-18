@@ -9,7 +9,7 @@ class ThreadFilters extends Filters
     protected $filters = ['by', 'popular', 'unanswered'];
 
     /**
-     * Filter the query by a given username
+     * Filter the query by a given username.
      * @param  string $username
      * @return mixed
      */
@@ -27,6 +27,7 @@ class ThreadFilters extends Filters
     protected function popular()
     {
         $this->builder->getQuery()->orders = [];
+
         return $this->builder->orderBy('replies_count', 'desc');
     }
 

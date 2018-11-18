@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class MentionUsersTest extends TestCase
 {
@@ -21,7 +21,7 @@ class MentionUsersTest extends TestCase
         $thread = create('App\Thread');
 
         $reply = make('App\Reply', [
-            'body' => '@JaneDoe look at this. Also @FrankDoe.'
+            'body' => '@JaneDoe look at this. Also @FrankDoe.',
         ]);
 
         $this->json('post', $thread->path().'/replies', $reply->toArray());

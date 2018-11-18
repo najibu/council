@@ -6,7 +6,7 @@ class Spam
 {
     protected $inspections = [
         InvalidKeywords::class,
-        KeyHeldDown::class
+        KeyHeldDown::class,
     ];
 
     public function detect($body)

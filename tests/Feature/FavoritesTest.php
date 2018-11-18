@@ -24,7 +24,7 @@ class FavoritesTest extends TestCase
 
         $reply = create('App\Reply');
         // If I post to a "favorite" endpoint
-        $this->post('replies/' . $reply->id . '/favorites');
+        $this->post('replies/'.$reply->id.'/favorites');
 
         // It should be recorded in the database.
         $this->assertCount(1, $reply->favorites);
@@ -39,7 +39,7 @@ class FavoritesTest extends TestCase
         // If I post to a "favorite" endpoint
         $reply->favorite();
 
-        $this->delete('replies/' . $reply->id . '/favorites');
+        $this->delete('replies/'.$reply->id.'/favorites');
         $this->assertCount(0, $reply->favorites);
     }
 
@@ -51,12 +51,11 @@ class FavoritesTest extends TestCase
         $reply = create('App\Reply');
         // If I post to a "favorite" endpoint
         try {
-            $this->post('replies/' . $reply->id . '/favorites');
-            $this->post('replies/' . $reply->id . '/favorites');
+            $this->post('replies/'.$reply->id.'/favorites');
+            $this->post('replies/'.$reply->id.'/favorites');
         } catch (Exception $e) {
             $this->fail('No inserting record twice.');
         }
-
 
         // It should be recorded in the database.
         $this->assertCount(1, $reply->favorites);

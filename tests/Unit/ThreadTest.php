@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Feature;
 
-use App\Notifications\ThreadWasUpdated;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
+use App\Notifications\ThreadWasUpdated;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ThreadTest extends TestCase
 {
@@ -48,7 +48,7 @@ class ThreadTest extends TestCase
     {
         $this->thread->addReply([
             'body' => 'Foobar',
-            'user_id' => 1
+            'user_id' => 1,
         ]);
 
         $this->assertCount(1, $this->thread->replies);
@@ -64,7 +64,7 @@ class ThreadTest extends TestCase
             ->subscribe()
             ->addReply([
                 'body' => 'Foobar',
-                'user_id' => create('App\User')->id
+                'user_id' => create('App\User')->id,
             ]);
 
         Notification::assertSentTo(auth()->user(), ThreadWasUpdated::class);
@@ -83,7 +83,6 @@ class ThreadTest extends TestCase
     {
         // Given we have a thread
         $thread = create('App\Thread');
-
 
         // When the user subscribes to the thread
         $thread->subscribe($userId = 1);
@@ -148,6 +147,6 @@ class ThreadTest extends TestCase
     {
         $thread = make('App\Thread', ['body' => '<script>alert("bad")</script><p>This is ok</p>']);
 
-        $this->assertEquals("<p>This is ok</p>", $thread->body);
+        $this->assertEquals('<p>This is ok</p>', $thread->body);
     }
 }

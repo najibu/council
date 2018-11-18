@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ParticipateInThreadTest extends TestCase
@@ -44,7 +43,7 @@ class ParticipateInThreadTest extends TestCase
         $thread = create('App\Thread');
         $reply = make('App\Reply', ['body' => null]);
 
-        $this->post($thread->path() . '/replies', $reply->toArray())
+        $this->post($thread->path().'/replies', $reply->toArray())
           ->assertSessionHasErrors('body');
     }
 
@@ -99,7 +98,7 @@ class ParticipateInThreadTest extends TestCase
 
         // When the user adds a reply to the thread
         $reply = create('App\Reply', [
-            'body' => 'Yahoo Customer Support'
+            'body' => 'Yahoo Customer Support',
         ]);
 
         $this->json('post', $thread->path().'/replies', $reply->toArray())
@@ -131,7 +130,7 @@ class ParticipateInThreadTest extends TestCase
         $thread = create('App\Thread');
 
         $reply = create('App\Reply', [
-            'body' => 'My simple reply'
+            'body' => 'My simple reply',
         ]);
 
         $this->post($thread->path().'/replies', $reply->toArray())

@@ -14,9 +14,8 @@ class SearchController extends Controller
             return Thread::search(request('q'))->paginate(25);
         }
 
-
         return view('threads.search', [
-            'trending' => $trending->get()
+            'trending' => $trending->get(),
         ]);
     }
 }

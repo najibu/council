@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Admin;
 
-use App\Channel;
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
+use App\Channel;
 use Tests\TestCase;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ChannelAdminstrationTest extends TestCase
 {
@@ -46,7 +46,7 @@ class ChannelAdminstrationTest extends TestCase
     {
         $response = $this->createChannel([
             'name' => 'php',
-            'description' => 'This is the channel for discussing all things PHP.'
+            'description' => 'This is the channel for discussing all things PHP.',
         ]);
 
         $this->get($response->headers->get('Location'))
@@ -60,6 +60,7 @@ class ChannelAdminstrationTest extends TestCase
         $this->createChannel(['name' => null])
             ->assertSessionHasErrors('name');
     }
+
     /** @test */
     public function a_channel_requires_a_description()
     {

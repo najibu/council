@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreatePostRequest;
 use App\Reply;
 use App\Thread;
+use App\Http\Requests\CreatePostRequest;
 
 class RepliesController extends Controller
 {
@@ -30,7 +30,7 @@ class RepliesController extends Controller
     /**
      * Persist a new reply.
      *
-     * @param  integer $channelId
+     * @param  int $channelId
      * @param  Thread  $thread
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -42,7 +42,7 @@ class RepliesController extends Controller
 
         return $thread->addReply([
             'body' => request('body'),
-            'user_id' => auth()->id()
+            'user_id' => auth()->id(),
         ])->load('owner');
     }
 

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Channel;
-use App\Filters\ThreadFilters;
-use App\Rules\Recaptcha;
 use App\Thread;
+use App\Channel;
 use App\Trending;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
+use App\Filters\ThreadFilters;
 
 class ThreadsController extends Controller
 {
@@ -36,7 +36,7 @@ class ThreadsController extends Controller
 
         return view('threads.index', [
             'threads' => $threads,
-            'trending' => $trending->get()
+            'trending' => $trending->get(),
         ]);
     }
 
@@ -62,14 +62,14 @@ class ThreadsController extends Controller
             'title' => 'required|spamfree',
             'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id',
-            'g-recaptcha-response' => ['required', $recaptcha]
+            'g-recaptcha-response' => ['required', $recaptcha],
         ]);
 
         $thread = Thread::create([
             'user_id' => auth()->id(),
             'channel_id' => request('channel_id'),
             'title' => request('title'),
-            'body' => request('body')
+            'body' => request('body'),
         ]);
 
         if (request()->wantsJson()) {
@@ -83,7 +83,7 @@ class ThreadsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  integer     $channel
+     * @param  int     $channel
      * @param  \App\Thread $thread
      * @return \Illuminate\Http\Response
      */
