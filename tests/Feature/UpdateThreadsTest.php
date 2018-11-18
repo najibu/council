@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UpdateThreadsTest extends TestCase
 {
@@ -33,11 +32,11 @@ class UpdateThreadsTest extends TestCase
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
 
         $this->patch($thread->path(), [
-            'title' => 'Changed'
+            'title' => 'Changed',
         ])->assertSessionHasErrors('body');
 
         $this->patch($thread->path(), [
-            'body' => 'Changed'
+            'body' => 'Changed',
         ])->assertSessionHasErrors('title');
     }
 
@@ -48,7 +47,7 @@ class UpdateThreadsTest extends TestCase
 
         $this->patchJson($thread->path(), [
             'title' => 'Changed',
-            'body' => 'Changed body'
+            'body' => 'Changed body',
         ]);
 
         tap($thread->fresh(), function ($thread) {

@@ -3,10 +3,9 @@
 namespace Tests;
 
 use App\Exceptions\Handler;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -34,7 +33,7 @@ abstract class TestCase extends BaseTestCase
     {
         $admin = $admin ?: create('App\User');
 
-        config(['council.adminstrators' => [ $admin->email ]]);
+        config(['council.adminstrators' => [$admin->email]]);
 
         $this->actingAs($admin);
 
@@ -49,9 +48,11 @@ abstract class TestCase extends BaseTestCase
             public function __construct()
             {
             }
+
             public function report(\Exception $e)
             {
             }
+
             public function render($request, \Exception $e)
             {
                 throw $e;

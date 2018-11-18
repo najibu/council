@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Notifications\DatabaseNotification;
 use Tests\TestCase;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class NotificationTest extends TestCase
 {
@@ -28,7 +28,7 @@ class NotificationTest extends TestCase
         // Then, each time a new reply is left ...
         $thread->addReply([
             'user_id' => auth()->id(),
-            'body' => 'Some reply here'
+            'body' => 'Some reply here',
         ]);
 
         // A notification should be prepared for the user
@@ -36,7 +36,7 @@ class NotificationTest extends TestCase
 
         $thread->addReply([
             'user_id' => create('App\User')->id,
-            'body' => 'Some reply here'
+            'body' => 'Some reply here',
         ]);
 
         $this->assertCount(1, auth()->user()->fresh()->notifications);
@@ -49,7 +49,7 @@ class NotificationTest extends TestCase
 
         $this->assertCount(
             1,
-            $this->getJson("/profiles/". auth()->user()->name ."/notifications")->json()
+            $this->getJson('/profiles/'.auth()->user()->name.'/notifications')->json()
         );
     }
 
@@ -61,7 +61,7 @@ class NotificationTest extends TestCase
         tap(auth()->user(), function ($user) {
             $this->assertCount(1, $user->unreadNotifications);
 
-            $this->delete("/profiles/{$user->name}/notifications/" . $user->unreadNotifications->first()->id);
+            $this->delete("/profiles/{$user->name}/notifications/".$user->unreadNotifications->first()->id);
 
             $this->assertCount(0, $user->fresh()->unreadNotifications);
         });

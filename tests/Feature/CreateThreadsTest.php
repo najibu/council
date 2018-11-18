@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Activity;
+use Tests\TestCase;
 use App\Rules\Recaptcha;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Tests\TestCase;
 
 class CreateThreadsTest extends TestCase
 {
@@ -53,7 +53,7 @@ class CreateThreadsTest extends TestCase
     {
         $response = $this->publishThread([
             'title' => 'Some title',
-            'body' => 'Some body.'
+            'body' => 'Some body.',
         ]);
 
         // Then, when we visit the thread page.
@@ -81,7 +81,7 @@ class CreateThreadsTest extends TestCase
     public function a_thread_requires_recaptcha_verification()
     {
         if (Recaptcha::isInTestMode()) {
-            $this->markTestSkipped("Recaptcha is in test mode.");
+            $this->markTestSkipped('Recaptcha is in test mode.');
         }
 
         unset(app()[Recaptcha::class]);
@@ -159,7 +159,7 @@ class CreateThreadsTest extends TestCase
         $this->assertEquals(0, Activity::count());
     }
 
-    public function publishThread($overrides=[])
+    public function publishThread($overrides = [])
     {
         $this->withExceptionHandling()->signIn();
 

@@ -15,8 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-
 Auth::routes();
 Route::get('/home', 'HomeController@index');
 
@@ -34,7 +32,6 @@ Route::delete('threads/{channel}/{thread}', 'ThreadsController@destroy')->name('
 Route::post('threads', 'ThreadsController@store')->middleware('must-be-confirmed');
 Route::get('threads/{channel}', 'ThreadsController@index');
 
-
 // LockedThreadsController
 Route::post('locked-threads/{thread}', 'LockedThreadsController@store')->name('locked-threads.store')->middleware('admin');
 Route::delete('locked-threads/{thread}', 'LockedThreadsController@destroy')->name('locked-threads.destroy')->middleware('admin');
@@ -42,7 +39,6 @@ Route::delete('locked-threads/{thread}', 'LockedThreadsController@destroy')->nam
 // ThreadSubscriptionsController
 Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionsController@store')->middleware('auth');
 Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionsController@destroy')->middleware('auth');
-
 
 // RepliesController
 Route::get('threads/{channel}/{thread}/replies', 'RepliesController@index');
@@ -80,7 +76,7 @@ Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middle
 Route::group([
     'prefix' => 'admin',
     'middleware' => 'admin',
-    'namespace' => 'Admin'
+    'namespace' => 'Admin',
 ], function () {
     Route::get('/', 'DashboardController@index')->name('admin.dashboard.index');
 

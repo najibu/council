@@ -3,8 +3,8 @@
 namespace Tests\Feature;
 
 use App\Trending;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class TrendingThreadsTest extends TestCase
 {

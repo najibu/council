@@ -13,7 +13,7 @@ class Reputation
      * Award reputation points to the given user.
      *
      * @param  User $user
-     * @param  integer $points
+     * @param  int $points
      */
     public static function award($user, $points)
     {
@@ -21,11 +21,11 @@ class Reputation
     }
 
     /**
-    * Reduce reputation points to the given user.
-    *
-    * @param  User $user
-    * @param  integer $points
-    */
+     * Reduce reputation points to the given user.
+     *
+     * @param  User $user
+     * @param  int $points
+     */
     public static function reduce($user, $points)
     {
         $user->decrement('reputation', $points);

@@ -3,9 +3,9 @@
 namespace Tests\Feature\Admin;
 
 use App\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AdminstratorTest extends TestCase
 {

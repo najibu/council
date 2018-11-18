@@ -10,6 +10,7 @@ trait Favoritable
             $model->favorites->each->delete();
         });
     }
+
     public function favorites()
     {
         return $this->morphMany(Favorite::class, 'favorited');
@@ -37,7 +38,7 @@ trait Favoritable
 
     public function isFavorited()
     {
-        return !! $this->favorites->where('user_id', auth()->id())->count();
+        return (bool) $this->favorites->where('user_id', auth()->id())->count();
     }
 
     public function getIsFavoritedAttribute()

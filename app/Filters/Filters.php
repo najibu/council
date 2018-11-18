@@ -11,7 +11,7 @@ abstract class Filters
     protected $filters = [];
 
     /**
-     * Filters construct
+     * Filters construct.
      * @param Request $request
      */
     public function __construct(Request $request)

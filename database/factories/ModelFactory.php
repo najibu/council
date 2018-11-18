@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Notifications\DatabaseNotification;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Notifications\DatabaseNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +14,7 @@ use Ramsey\Uuid\Uuid;
 |
 */
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+/* @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
@@ -29,7 +29,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->state(App\User::class, 'unconfirmed', function () {
     return [
-        'confirmed' => false
+        'confirmed' => false,
     ];
 });
 
@@ -47,7 +47,7 @@ $factory->define(App\Thread::class, function ($faker) {
     'body' => $faker->paragraph,
     'visits' => 0,
     'slug' => str_slug($title),
-    'locked' => false
+    'locked' => false,
   ];
 });
 
@@ -57,7 +57,7 @@ $factory->define(App\Channel::class, function ($faker) {
     return [
     'name' => $name,
     'slug' => $name,
-    'description' => $faker->sentence
+    'description' => $faker->sentence,
   ];
 });
 
@@ -69,7 +69,7 @@ $factory->define(App\Reply::class, function ($faker) {
     'thread_id' => function () {
         return factory('App\Thread')->create()->id;
     },
-    'body' => $faker->paragraph
+    'body' => $faker->paragraph,
   ];
 });
 
@@ -81,6 +81,6 @@ $factory->define(DatabaseNotification::class, function ($faker) {
             return auth()->id() ?: factory('App\User')->create()->id;
         },
         'notifiable_type' => 'App\User',
-        'data' => ['foo' => 'bar']
+        'data' => ['foo' => 'bar'],
    ];
 });

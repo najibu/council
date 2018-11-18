@@ -2,12 +2,13 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
 use Zttp\Zttp;
+use Illuminate\Contracts\Validation\Rule;
 
 class Recaptcha implements Rule
 {
     const URL = 'https://www.google.com/recaptcha/api/siteverify';
+
     /**
      * Create a new rule instance.
      *
@@ -30,7 +31,7 @@ class Recaptcha implements Rule
         $response = Zttp::asFormParams()->post(static::URL, [
             'secret'   => config('council.recaptcha.secret'),
             'response' => $value,
-            'remoteip' => request()->ip()
+            'remoteip' => request()->ip(),
         ]);
 
         return $response->json()['success'];
@@ -51,7 +52,7 @@ class Recaptcha implements Rule
         return Zttp::asFormParams()->post(static::URL, [
             'secret'   => config('council.recaptcha.secret'),
             'response' => 'test',
-            'remoteip' => request()->ip()
+            'remoteip' => request()->ip(),
         ])->json()['success'];
     }
 }

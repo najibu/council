@@ -3,20 +3,20 @@
 namespace App;
 
 use Carbon\Carbon;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
     /**
-     * The accessor to append to the model's array form
+     * The accessor to append to the model's array form.
      *
      * @var array
      */
     protected $appends = [
-        'isAdmin'
+        'isAdmin',
     ];
 
     /**
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar_path'
+        'name', 'email', 'password', 'avatar_path',
     ];
 
     /**
@@ -38,7 +38,7 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
-        'confirmed' => 'boolean'
+        'confirmed' => 'boolean',
     ];
 
     /**
@@ -108,7 +108,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Determine if the user is an adminstrator
+     * Determine if the user is an adminstrator.
      *
      * @return bool
      */
@@ -136,6 +136,6 @@ class User extends Authenticatable
      */
     public function visitedThreadCacheKey($thread)
     {
-        return sprintf("users.%s.visits.%s", $this->id, $thread->id);
+        return sprintf('users.%s.visits.%s', $this->id, $thread->id);
     }
 }

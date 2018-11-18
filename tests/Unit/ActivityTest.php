@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Activity;
 use Carbon\Carbon;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ActivityTest extends TestCase
 {
@@ -19,10 +19,10 @@ class ActivityTest extends TestCase
         $thread = create('App\Thread');
 
         $this->assertDatabaseHas('activities', [
-            'type' => 'created_' . strtolower((new \ReflectionClass($thread))->getShortName()),
+            'type' => 'created_'.strtolower((new \ReflectionClass($thread))->getShortName()),
             'user_id' => auth()->id(),
             'subject_id' => $thread->id,
-            'subject_type' => get_class($thread)
+            'subject_type' => get_class($thread),
         ]);
 
         $activity = Activity::first();
@@ -50,7 +50,7 @@ class ActivityTest extends TestCase
         create('App\Thread', ['user_id' => auth()->id()], 2);
 
         auth()->user()->activity()->first()->update([
-            'created_at' => Carbon::now()->subWeek()
+            'created_at' => Carbon::now()->subWeek(),
         ]);
         // When we fetch their feed.
         $feed = Activity::feed(auth()->user());

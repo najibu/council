@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class LockThreadsTest extends TestCase
+class LockThreads extends TestCase
 {
     use DatabaseMigrations;
 
@@ -20,14 +20,14 @@ class LockThreadsTest extends TestCase
 
         $this->post(route('locked-threads.store', $thread))->assertStatus(403);
 
-        $this->assertFalse(!! $thread->fresh()->locked);
+        $this->assertFalse((bool) $thread->fresh()->locked);
     }
 
     /** @test  */
     public function adminstrator_can_lock_threads()
     {
         $user = factory('App\User')->create();
-        config(['council.adminstrators' => [ $user->email ]]);
+        config(['council.adminstrators' => [$user->email]]);
         $this->signIn($user);
 
         $thread = create('App\Thread', ['user_id' => auth()->id()]);
@@ -41,7 +41,7 @@ class LockThreadsTest extends TestCase
     public function adminstrator_can_unlock_threads()
     {
         $user = factory('App\User')->create();
-        config(['council.adminstrators' => [ $user->email ]]);
+        config(['council.adminstrators' => [$user->email]]);
         $this->signIn($user);
 
         $thread = create('App\Thread', ['user_id' => auth()->id(), 'locked' => true]);
@@ -58,7 +58,7 @@ class LockThreadsTest extends TestCase
 
         $thread = create('App\Thread', ['locked' => true]);
 
-        $this->post($thread->path() . '/replies', [
+        $this->post($thread->path().'/replies', [
             'body' => 'Foobar',
             'user_id' => auth()->id(),
         ])->assertStatus(422);
