@@ -51,7 +51,7 @@ class ThreadsTest extends TestCase
         $threadByNajibu = create('App\Thread', ['user_id' => auth()->id()]);
         $threadByNotNajibu = create('App\Thread');
 
-        $this->get('threads?by=NajibuNsubuga')
+        $this->get('threads?by=x')
             ->assertSee($threadByNajibu->title)
             ->assertDontSee($threadByNotNajibu->title);
     }
