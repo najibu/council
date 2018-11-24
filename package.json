@@ -17,7 +17,10 @@
     "vue": "^2.5.17"
   },
   "dependencies": {
+    "ajv": "^6.5.5",
     "at.js": "^1.5.4",
+    "highlight.js": "^9.12.0",
+    "imagemin": "^5.0.0",
     "jquery.caret": "^0.3.1",
     "moment": "^2.22.2",
     "trix": "^0.12.1",
