@@ -1,9 +1,9 @@
 <template>
-    <li class="dropdown" :class="{'open' : toggle}">
+    <li class="dropdown" :class="{open : toggle}">
         <a href="#" class="dropdown-toggle"
-            @click.prevent="toggle = !toggle"
             aria-haspopup="true"
             aria-expanded="false"
+            @click.prevent="toggle = !toggle"
         >
             Channels <span class="caret"></span>
         </a>
@@ -15,6 +15,7 @@
                     placeholder="Filter Channels..."
                 >
             </div>
+
             <ul class="list-group channel-list">
                 <li class="list-group-item" v-for="channel in filteredThreads">
                     <a :href="`/threads/${channel.slug}`"
@@ -34,13 +35,13 @@
             return {
                 toggle: false,
                 filter: ''
-            }
+            };
         },
 
         computed: {
             filteredThreads () {
                 return this.channels.filter(channel => {
-                    return channel.name.toLowerCase().includes(this.filter.toLocaleLowerCase());
+                    return channel.name.toLowerCase().startsWith(this.filter.toLocaleLowerCase());
                 });
             }
         }
@@ -51,6 +52,7 @@
     .channel-dropdown {
         padding: 0;
     }
+
     .input-wrapper {
         padding: 5rem 1rem;
     }
