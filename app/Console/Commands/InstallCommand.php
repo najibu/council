@@ -76,6 +76,7 @@ class InstallCommand extends Command
     {
         $this->info('>> Welcome to the Council installation process! <<');
     }
+
     /**
      * Display the completion message.
      */
