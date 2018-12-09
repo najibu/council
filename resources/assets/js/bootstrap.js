@@ -42,16 +42,6 @@ Vue.prototype.signedIn = window.App.signedIn;
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-let Highlighter = require('highlight.js');
-require('highlight.js/styles/foundation.css'); // load foundation style
-
-Vue.prototype.highlight = function (block) {
-    if (!block) return;
-    block.querySelectorAll('pre').forEach(function (node) {
-        Highlighter.highlightBlock(node);
-    });
-}
-
 window.axios = require('axios');
 
 window.axios.defaults.headers.common = {

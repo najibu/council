@@ -21,6 +21,8 @@
     export default {
         props: ['name', 'value', 'placeholder'],
 
+        components: {Trix},
+
         methods: {
             change({target}) {
                 this.$emit('input', target.value)
