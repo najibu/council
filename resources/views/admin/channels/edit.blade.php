@@ -5,6 +5,6 @@
 
         {{ method_field('PATCH') }}
 
-        @include('admin.channels._form')
+        @include('admin.channels._form', ['buttonText' => 'Update channel'])
     </form>
 @endsection

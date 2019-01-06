@@ -11,7 +11,18 @@
 </div>
 
 <div class="form-group">
-    <button type="submit" class="btn btn-primary">Add</button>
+    <label for="archived">Status:</label>
+
+    <select name="archived" id="archived" class="form-control">
+        <option value="0" {{ $channel->archived ? '' : 'selected'  }}>Active</option>
+        <option value="1" {{ $channel->archived ? 'selected' : ''  }}>Archieved</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <button type="submit" class="btn btn-primary">
+        {{ $buttonText ?? 'Add Channel' }}
+    </button>
 </div>
 
 @if (count($errors))
