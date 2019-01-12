@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Channel;
-use App\Filters\ThreadFilters;
-use App\Rules\Recaptcha;
 use App\Thread;
+use App\Channel;
 use App\Trending;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
+use App\Filters\ThreadFilters;
 use Illuminate\Validation\Rule;
 
 class ThreadsController extends Controller
