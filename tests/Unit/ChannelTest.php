@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
+use App\Channel;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class ChannelTest extends TestCase
 {
@@ -28,5 +29,14 @@ class ChannelTest extends TestCase
         $channel->archive();
 
         $this->assertTrue($channel->archived);
+    }
+
+    /** @test  */
+    public function archived_channels_are_excluded_by_default()
+    {
+        create('App\Channel');
+        create('App\Channel', ['archived' => true]);
+
+        $this->assertEquals(1, Channel::count());
     }
 }
