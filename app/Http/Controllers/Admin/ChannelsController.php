@@ -13,7 +13,7 @@ class ChannelsController extends Controller
     public function index()
     {
         $channels = Channel::withoutGlobalScopes()
-            ->with('threads')
+            ->withCount('threads')
             ->get();
 
         return view('admin.channels.index', compact('channels'));

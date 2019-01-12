@@ -23,7 +23,7 @@
                     <td>{{$channel->name}}</td>
                     <td>{{$channel->slug}}</td>
                     <td>{{$channel->description}}</td>
-                    <td>{{ count($channel->threads) }}</td>
+                    <td>{{ $channel->threads_count }}</td>
                     <td>
                         <a href="{{ route('admin.channels.edit', ['channel' => $channel->slug]) }}"
                             class="btn btn-default btn-xs"
