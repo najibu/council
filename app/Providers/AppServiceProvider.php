@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Channel;
 use App\Trending;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

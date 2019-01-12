@@ -18,6 +18,7 @@ class LoadCommonData
     {
         view()->share('channels', \App\Channel::all());
         view()->share('trending', app(Trending::class)->get());
+
         return $next($request);
     }
 }
