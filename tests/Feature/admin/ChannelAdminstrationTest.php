@@ -101,6 +101,20 @@ class ChannelAdminstrationTest extends TestCase
         $this->assertTrue($channel->fresh()->archived);
     }
 
+    /** @test  */
+    public function archive_channel_should_not_influence_existing_thread()
+    {
+        $this->signInAdmin();
+
+        $channel = create('App\Channel');
+        $thread = create('App\Thread', ['channel_id' => $channel->id]);
+        $path = $thread->path();
+
+        $channel->archive();
+
+        $this->assertEquals($path, $thread->fresh()->path());
+    }
+
     /** @test */
     public function a_channel_requires_a_description()
     {
