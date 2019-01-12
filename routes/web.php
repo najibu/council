@@ -11,14 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/', 'threads');
 
 Auth::routes();
 Route::get('/home', 'HomeController@index');
-
-Route::view('scan', 'scan');
 
 // SearchController
 Route::get('threads/search', 'SearchController@show')->name('threads.search');
@@ -30,7 +26,7 @@ Route::get('threads/{channel}/{thread}', 'ThreadsController@show');
 Route::patch('threads/{channel}/{thread}', 'ThreadsController@update');
 Route::delete('threads/{channel}/{thread}', 'ThreadsController@destroy')->name('threads.destroy');
 Route::post('threads', 'ThreadsController@store')->middleware('must-be-confirmed');
-Route::get('threads/{channel}', 'ThreadsController@index');
+Route::get('threads/{channel}', 'ThreadsController@index')->name('channels');
 
 // LockedThreadsController
 Route::post('locked-threads/{thread}', 'LockedThreadsController@store')->name('locked-threads.store')->middleware('admin');
