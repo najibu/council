@@ -162,21 +162,12 @@ class CreateThreadsTest extends TestCase
     /** @test  */
     public function a_new_thread_cannot_be_created_in_an_archived_channel()
     {
-        $channel = create('App\Channel');
-
-        $response = $this->publishThread([
-            'title' => 'Some Title',
-            'body' => 'Some body',
-        ]);
-
-        $this->get($response->headers->get('Location'))
-            ->assertSee('Some Title')
-            ->assertSee('Some body');
-
-        $channel->archive();
+        $channel = create('App\Channel', ['archived' => true]);
 
         $this->publishThread(['channel_id' => $channel->id])
             ->assertSessionHasErrors('channel_id');
+
+        $this->assertCount(0, $channel->threads);
     }
 
     public function publishThread($overrides = [])
