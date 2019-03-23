@@ -8,16 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
-
-    /**
-     * The accessor to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'isAdmin',
-    ];
+    use Notifiable, HasReputation;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +16,19 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'avatar_path',
+        'name',
+        'email',
+        'password',
+        'avatar_path'
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'isAdmin'
     ];
 
     /**
@@ -34,11 +37,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'email',
+        'password',
+        'remember_token',
+        'email',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
     protected $casts = [
-        'confirmed' => 'boolean',
+        'confirmed' => 'boolean'
     ];
 
     /**
@@ -48,7 +58,7 @@ class User extends Authenticatable
      */
     public function getRouteKeyName()
     {
-        return 'name';
+        return 'username';
     }
 
     /**
@@ -81,6 +91,9 @@ class User extends Authenticatable
         return $this->hasMany(Activity::class);
     }
 
+    /**
+     * Mark the user's account as confirmed.
+     */
     public function confirm()
     {
         $this->confirmed = true;
@@ -89,9 +102,24 @@ class User extends Authenticatable
         $this->save();
     }
 
+    /**
+     * Determine if the user is an administrator.
+     *
+     * @return bool
+     */
     public function isAdmin()
     {
-        return in_array($this->email, config('council.adminstrators'));
+        return in_array($this->email, config('council.administrators'));
+    }
+
+    /**
+     * Determine if the user is an administrator.
+     *
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return $this->isAdmin();
     }
 
     /**
@@ -108,16 +136,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Determine if the user is an adminstrator.
-     *
-     * @return bool
-     */
-    public function getIsAdminAttribute()
-    {
-        return $this->isAdmin();
-    }
-
-    /**
      * Get the path to the user's avatar.
      *
      * @param  string $avatar
@@ -125,7 +143,7 @@ class User extends Authenticatable
      */
     public function getAvatarPathAttribute($avatar)
     {
-        return asset($avatar ?: 'images/avatars/default.png');
+        return asset($avatar ?: 'images/avatars/default.svg');
     }
 
     /**

@@ -7,7 +7,7 @@ use App\Inspections\Spam;
 
 class SpamTest extends TestCase
 {
-    /** @test  */
+    /** @test */
     public function it_checks_for_invalid_keywords()
     {
         $spam = new Spam();
@@ -17,15 +17,5 @@ class SpamTest extends TestCase
         $this->expectException('Exception');
 
         $spam->detect('yahoo customer support');
-    }
-
-    /** @test  */
-    public function it_checks_for_any_key_being_held_down()
-    {
-        $spam = new Spam();
-
-        $this->expectException('Exception');
-
-        $spam->detect('Hello world aaaaaa');
     }
 }

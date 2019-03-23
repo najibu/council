@@ -4,6 +4,7 @@ namespace App;
 
 use Laravel\Scout\Searchable;
 use App\Filters\ThreadFilters;
+use App\Events\ThreadWasPublished;
 use App\Events\ThreadReceivedNewReply;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -26,9 +27,14 @@ class Thread extends Model
      */
     protected $with = ['creator', 'channel'];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
     protected $casts = [
         'locked' => 'boolean',
-        'pinned' => 'boolean',
+        'pinned' => 'boolean'
     ];
 
     /**
@@ -41,13 +47,15 @@ class Thread extends Model
         static::deleting(function ($thread) {
             $thread->replies->each->delete();
 
-            Reputation::reduce($thread->creator, Reputation::THREAD_WAS_PUBLISHED);
+            $thread->creator->loseReputation('thread_published');
         });
 
         static::created(function ($thread) {
             $thread->update(['slug' => $thread->title]);
 
-            Reputation::award($thread->creator, Reputation::THREAD_WAS_PUBLISHED);
+            event(new ThreadWasPublished($thread));
+
+            $thread->creator->gainReputation('thread_published');
         });
     }
 
@@ -72,6 +80,14 @@ class Thread extends Model
     }
 
     /**
+     * Get the title for the thread.
+     */
+    public function title()
+    {
+        return $this->title;
+    }
+
+    /**
      * A thread is assigned a channel.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -89,6 +105,16 @@ class Thread extends Model
     public function replies()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    /**
+     * A thread can have a best reply.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function bestReply()
+    {
+        return $this->hasOne(Reply::class, 'thread_id');
     }
 
     /**
@@ -127,7 +153,7 @@ class Thread extends Model
     public function subscribe($userId = null)
     {
         $this->subscriptions()->create([
-            'user_id' => $userId ?: auth()->id(),
+            'user_id' => $userId ?: auth()->id()
         ]);
 
         return $this;
@@ -162,6 +188,10 @@ class Thread extends Model
      */
     public function getIsSubscribedToAttribute()
     {
+        if (! auth()->id()) {
+            return false;
+        }
+
         return $this->subscriptions()
             ->where('user_id', auth()->id())
             ->exists();
@@ -180,36 +210,74 @@ class Thread extends Model
         return $this->updated_at > cache($key);
     }
 
+    /**
+     * Get the route key name.
+     *
+     * @return string
+     */
     public function getRouteKeyName()
     {
         return 'slug';
     }
 
+    /**
+     * Access the body attribute.
+     *
+     * @param  string $body
+     * @return string
+     */
+    public function getBodyAttribute($body)
+    {
+        return \Purify::clean($body);
+    }
+
+    /**
+     * Set the proper slug attribute.
+     *
+     * @param string $value
+     */
     public function setSlugAttribute($value)
     {
-        $slug = str_slug($value);
-
-        if (static::whereSlug($slug)->exists()) {
-            $slug = "{$slug}-".$this->id;
+        if (static::whereSlug($slug = str_slug($value))->exists()) {
+            $slug = "{$slug}-{$this->id}";
         }
 
         $this->attributes['slug'] = $slug;
     }
 
+    /**
+     * Mark the given reply as the best answer.
+     *
+     * @param Reply $reply
+     */
     public function markBestReply(Reply $reply)
     {
+        if ($this->hasBestReply()) {
+            $this->bestReply->owner->loseReputation('best_reply_awarded');
+        }
+
         $this->update(['best_reply_id' => $reply->id]);
 
-        Reputation::award($reply->owner, Reputation::BEST_REPLY_AWARDED);
+        $reply->owner->gainReputation('best_reply_awarded');
     }
 
+    /**
+     * Determine if the thread has a current best reply.
+     *
+     * @return bool
+     */
+    public function hasBestReply()
+    {
+        return ! is_null($this->best_reply_id);
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
     public function toSearchableArray()
     {
         return $this->toArray() + ['path' => $this->path()];
-    }
-
-    public function getBodyAttribute($body)
-    {
-        return \Purify::clean($body);
     }
 }

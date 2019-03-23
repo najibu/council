@@ -1,22 +1,22 @@
 <template>
-    <div>
-        <div v-html="content" ref="content"></div>
-    </div>
+  <div>
+      <div v-html="content" ref="content"></div>
+  </div>
 </template>
 
 <script>
     import Highlighter from 'highlight.js';
-    import 'highlight.js/styles/foundation.css'; // load foundation style
+    import 'highlight.js/styles/foundation.css';
 
     export default {
         props: ['content'],
 
         mounted () {
-            this.highlight(this.$refs['content']);
+            this.highlight(this.$refs.content);
         },
 
         methods: {
-            highlight (block) {
+            highlight(block) {
                 if (! block) return;
 
                 block.querySelectorAll('pre').forEach(

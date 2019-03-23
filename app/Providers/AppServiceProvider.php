@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Channel;
-use Illuminate\Support\Facades\View;
+use App\Trending;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,15 +12,8 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Trending $trending)
     {
-        // View::composer('*', function ($view) {
-        //     $channels = \Cache::rememberForever('channels', function () {
-        //         return Channel::all();
-        //     });
-        //     $view->with(compact('channels'));
-        // });
-
         \Validator::extend('spamfree', 'App\Rules\SpamFree@passes');
     }
 
