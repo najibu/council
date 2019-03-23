@@ -28,6 +28,8 @@ Vue.component("register", require("./components/Register"));
 
 Vue.component("thread-view", require("./pages/Thread.vue"));
 
+Vue.config.ignoredElements = ['trix-editor']
+
 const app = new Vue({
     el: "#app",
 
