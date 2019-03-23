@@ -51,7 +51,7 @@ class ThreadWasUpdated extends Notification
     {
         return [
             'message' => $this->reply->owner->name.' replied to '.$this->thread->title,
-            'link' => $this->reply->path(),
+            'link' => $this->reply->path()
         ];
     }
 }

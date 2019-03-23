@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Reply;
@@ -15,7 +14,6 @@ class RepliesController extends Controller
     {
         $this->middleware('auth', ['except' => 'index']);
     }
-
     /**
      * Fetch all relevant replies.
      *
@@ -26,26 +24,24 @@ class RepliesController extends Controller
     {
         return $thread->replies()->paginate(20);
     }
-
     /**
      * Persist a new reply.
      *
-     * @param  int $channelId
-     * @param  Thread  $thread
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  int           $channelId
+     * @param  Thread            $thread
+     * @param  CreatePostRequest $form
+     * @return \Illuminate\Database\Eloquent\Model
      */
     public function store($channelId, Thread $thread, CreatePostRequest $form)
     {
         if ($thread->locked) {
             return response('Thread is locked', 422);
         }
-
         return $thread->addReply([
             'body' => request('body'),
-            'user_id' => auth()->id(),
+            'user_id' => auth()->id()
         ])->load('owner');
     }
-
     /**
      * Update an existing reply.
      *
@@ -54,12 +50,8 @@ class RepliesController extends Controller
     public function update(Reply $reply)
     {
         $this->authorize('update', $reply);
-
-        request()->validate(['body' => 'required|spamfree']);
-
-        $reply->update(request(['body']));
+        $reply->update(request()->validate(['body' => 'required|spamfree']));
     }
-
     /**
      * Delete the given reply.
      *
@@ -69,13 +61,10 @@ class RepliesController extends Controller
     public function destroy(Reply $reply)
     {
         $this->authorize('update', $reply);
-
         $reply->delete();
-
         if (request()->expectsJson()) {
             return response(['status' => 'Reply deleted']);
         }
-
         return back();
     }
 }

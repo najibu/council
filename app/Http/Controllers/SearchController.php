@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Thread;
-use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
+    /**
+     * Show the search results.
+     *
+     * @return mixed
+     */
     public function show()
     {
         if (request()->expectsJson()) {
