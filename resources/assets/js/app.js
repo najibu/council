@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -15,18 +14,19 @@ require("./bootstrap");
 
 Vue.component("flash", require("./components/Flash.vue"));
 Vue.component("paginator", require("./components/Paginator.vue"));
-Vue.component("user-notifications", require("./components/UserNotifications.vue"));
+Vue.component(
+    "user-notifications",
+    require("./components/UserNotifications.vue")
+);
 Vue.component("avatar-form", require("./components/AvatarForm.vue"));
 Vue.component("wysiwyg", require("./components/Wysiwyg.vue"));
 Vue.component("dropdown", require("./components/Dropdown.vue"));
-Vue.component("channel-dropdown", require("./components/ChannelDropdwon.vue"));
+Vue.component("channel-dropdown", require("./components/ChannelDropdown.vue"));
 Vue.component("logout-button", require("./components/LogoutButton"));
 Vue.component("login", require("./components/Login"));
 Vue.component("register", require("./components/Register"));
 
 Vue.component("thread-view", require("./pages/Thread.vue"));
-
-Vue.config.ignoredElements = ["trix-editor"]
 
 const app = new Vue({
     el: "#app",

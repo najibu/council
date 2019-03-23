@@ -11,13 +11,13 @@
     "axios": "^0.15.3",
     "browser-sync": "^2.23.6",
     "browser-sync-webpack-plugin": "^2.0.1",
-    "cross-env": "^3.2.3",
+    "cross-env": "^5.1",
     "jquery": "^3.3.1",
-    "laravel-mix": "^4.0.13",
+    "laravel-mix": "^2.1.11",
     "lodash": "^4.17.10",
     "sass": "^1.17.3",
     "sass-loader": "7.*",
-    "tailwindcss": "^0.4.1",
+    "tailwindcss": "^0.4.3",
     "vue": "^2.5.17"
   },
   "dependencies": {

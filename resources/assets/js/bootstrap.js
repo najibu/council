@@ -2,7 +2,6 @@
 window._ = require('lodash');
 
 import InstantSearch from 'vue-instantsearch';
-
 import VModal from 'vue-js-modal'
 
 window.$ = window.jQuery = require('jquery');
@@ -31,6 +30,8 @@ Vue.prototype.authorize = function (...params) {
 };
 
 Vue.prototype.signedIn = window.App.signedIn;
+
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -48,4 +49,4 @@ window.events = new Vue();
 
 window.flash = function (message, level = 'success') {
     window.events.$emit('flash', { message, level });
-}
+};
