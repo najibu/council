@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Reply;
@@ -14,6 +15,7 @@ class RepliesController extends Controller
     {
         $this->middleware('auth', ['except' => 'index']);
     }
+
     /**
      * Fetch all relevant replies.
      *
@@ -24,6 +26,7 @@ class RepliesController extends Controller
     {
         return $thread->replies()->paginate(20);
     }
+
     /**
      * Persist a new reply.
      *
@@ -37,11 +40,13 @@ class RepliesController extends Controller
         if ($thread->locked) {
             return response('Thread is locked', 422);
         }
+
         return $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id()
         ])->load('owner');
     }
+
     /**
      * Update an existing reply.
      *
@@ -52,6 +57,7 @@ class RepliesController extends Controller
         $this->authorize('update', $reply);
         $reply->update(request()->validate(['body' => 'required|spamfree']));
     }
+
     /**
      * Delete the given reply.
      *
@@ -65,6 +71,7 @@ class RepliesController extends Controller
         if (request()->expectsJson()) {
             return response(['status' => 'Reply deleted']);
         }
+
         return back();
     }
 }

@@ -12,6 +12,7 @@ class Spam
     protected $inspections = [
         InvalidKeywords::class
     ];
+
     /**
      * Detect spam.
      *
@@ -23,6 +24,7 @@ class Spam
         foreach ($this->inspections as $inspection) {
             app($inspection)->detect($body);
         }
+
         return false;
     }
 }
