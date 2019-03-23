@@ -19,20 +19,28 @@ class SampleDataSeeder extends Seeder
     public function run()
     {
         Schema::disableForeignKeyConstraints();
-        $this->channels();
-        $this->threads();
+
+        $this->channels()->content();
+
         Schema::enableForeignKeyConstraints();
     }
 
+    /**
+     * Seed the channels table.
+     */
     protected function channels()
     {
         Channel::truncate();
 
-        factory(Channel::class, 10)
-            ->create();
+        factory(Channel::class, 10)->create();
+
+        return $this;
     }
 
-    protected function threads()
+    /**
+     * Seed the thread-related tables.
+     */
+    protected function content()
     {
         Thread::truncate();
         Reply::truncate();
@@ -40,7 +48,6 @@ class SampleDataSeeder extends Seeder
         Activity::truncate();
         Favorite::truncate();
 
-        factory(Thread::class, 50)
-            ->create();
+        factory(Thread::class, 50)->create();
     }
 }
