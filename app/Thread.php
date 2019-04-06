@@ -132,6 +132,14 @@ class Thread extends Model
         return $reply;
     }
 
+    public function unsetBestReply()
+    {
+        if ($this->hasBestReply()) {
+            $this->bestReply->owner->loseReputation('best_reply_awarded');
+            $this->update(['best_reply_id' => null]);
+        }
+    }
+
     /**
      * Apply all relevant thread filters.
      *

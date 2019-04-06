@@ -43,24 +43,17 @@ class PinThreadsTest extends TestCase
         $threads = create(Thread::class, [], 3);
         $ids = $threads->pluck('id');
 
-        $this->getJson(route('threads'))
-            ->assertJson([
-                'data' => [
-                    ['id' => $ids[0]],
-                    ['id' => $ids[1]],
-                    ['id' => $ids[2]]
-                ]
-            ]);
+        $responseData = $this->getJson(route('threads'))->decodeResponseJson()['data'];
+        $this->assertEquals($ids[0], $responseData[0]['id']);
+        $this->assertEquals($ids[1], $responseData[1]['id']);
+        $this->assertEquals($ids[2], $responseData[2]['id']);
+
 
         $this->post(route('pinned-threads.store', $pinned = $threads->last()));
 
-        $this->getJson(route('threads'))
-            ->assertJson([
-                'data' => [
-                    ['id' => $pinned->id],
-                    ['id' => $ids[0]],
-                    ['id' => $ids[1]]
-                ]
-            ]);
+        $responseData = $this->getJson(route('threads'))->decodeResponseJson()['data'];
+        $this->assertEquals($pinned->id, $responseData[0]['id']);
+        $this->assertEquals($ids[0], $responseData[1]['id']);
+        $this->assertEquals($ids[1], $responseData[2]['id']);
     }
 }
