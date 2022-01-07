@@ -19,7 +19,7 @@ class Trending
     /**
      * Push a new thread to the trending list.
      *
-     * @param Thread $thread
+     * @param  Thread  $thread
      */
     public function push($thread)
     {
