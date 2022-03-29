@@ -2,8 +2,8 @@
 
 namespace App\Events;
 
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class ThreadReceivedNewReply
 {
@@ -12,14 +12,14 @@ class ThreadReceivedNewReply
     /**
      * The reply that was posted.
      *
-     * @param \App\Reply $reply
+     * @param  \App\Reply  $reply
      */
     public $reply;
 
     /**
      * Create a new event instance.
      *
-     * @param \App\Reply $reply
+     * @param  \App\Reply  $reply
      */
     public function __construct($reply)
     {
