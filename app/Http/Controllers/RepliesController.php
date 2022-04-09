@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostRequest;
 use App\Reply;
 use App\Thread;
-use App\Http\Requests\CreatePostRequest;
 
 class RepliesController extends Controller
 {
@@ -19,8 +19,8 @@ class RepliesController extends Controller
     /**
      * Fetch all relevant replies.
      *
-     * @param int    $channelId
-     * @param Thread $thread
+     * @param  int  $channelId
+     * @param  Thread  $thread
      */
     public function index($channelId, Thread $thread)
     {
@@ -30,9 +30,9 @@ class RepliesController extends Controller
     /**
      * Persist a new reply.
      *
-     * @param  int           $channelId
-     * @param  Thread            $thread
-     * @param  CreatePostRequest $form
+     * @param  int  $channelId
+     * @param  Thread  $thread
+     * @param  CreatePostRequest  $form
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function store($channelId, Thread $thread, CreatePostRequest $form)
@@ -50,7 +50,7 @@ class RepliesController extends Controller
     /**
      * Update an existing reply.
      *
-     * @param Reply $reply
+     * @param  Reply  $reply
      */
     public function update(Reply $reply)
     {
@@ -61,7 +61,7 @@ class RepliesController extends Controller
     /**
      * Delete the given reply.
      *
-     * @param  Reply $reply
+     * @param  Reply  $reply
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Reply $reply)

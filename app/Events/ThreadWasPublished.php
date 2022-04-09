@@ -18,7 +18,7 @@ class ThreadWasPublished
     /**
      * Create a new event instance.
      *
-     * @param \App\Thread $thread
+     * @param  \App\Thread  $thread
      * @return void
      */
     public function __construct($thread)
