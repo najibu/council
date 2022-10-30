@@ -67,7 +67,7 @@ class Channel extends Model
     /**
      * Set the name of the channel.
      *
-     * @param string $name
+     * @param  string  $name
      */
     public function setNameAttribute($name)
     {
