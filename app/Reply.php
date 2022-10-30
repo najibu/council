@@ -107,7 +107,7 @@ class Reply extends Model
     /**
      * Access the body attribute.
      *
-     * @param  string $body
+     * @param  string  $body
      * @return string
      */
     public function getBodyAttribute($body)
@@ -118,7 +118,7 @@ class Reply extends Model
     /**
      * Set the body attribute.
      *
-     * @param string $body
+     * @param  string  $body
      */
     public function setBodyAttribute($body)
     {
