@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Thread;
 use App\Channel;
-use App\Trending;
-use App\Rules\Recaptcha;
 use App\Filters\ThreadFilters;
+use App\Rules\Recaptcha;
+use App\Thread;
+use App\Trending;
 use Illuminate\Validation\Rule;
 
 class ThreadsController extends Controller
@@ -22,9 +22,9 @@ class ThreadsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param  Channel      $channel
-     * @param ThreadFilters $filters
-     * @param \App\Trending $trending
+     * @param  Channel  $channel
+     * @param  ThreadFilters  $filters
+     * @param  \App\Trending  $trending
      * @return \Illuminate\Http\Response
      */
     public function index(Channel $channel, ThreadFilters $filters)
@@ -56,7 +56,7 @@ class ThreadsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Rules\Recaptcha $recaptcha
+     * @param  \App\Rules\Recaptcha  $recaptcha
      * @return \Illuminate\Http\Response
      */
     public function store(Recaptcha $recaptcha)
@@ -91,9 +91,9 @@ class ThreadsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int      $channel
+     * @param  int  $channel
      * @param  \App\Thread  $thread
-     * @param \App\Trending $trending
+     * @param  \App\Trending  $trending
      * @return \Illuminate\Http\Response
      */
     public function show($channel, Thread $thread, Trending $trending)
@@ -112,8 +112,8 @@ class ThreadsController extends Controller
     /**
      * Update the given thread.
      *
-     * @param string $channel
-     * @param Thread $thread
+     * @param  string  $channel
+     * @param  Thread  $thread
      */
     public function update($channel, Thread $thread)
     {
@@ -130,8 +130,8 @@ class ThreadsController extends Controller
     /**
      * Delete the given thread.
      *
-     * @param        $channel
-     * @param Thread $thread
+     * @param  $channel
+     * @param  Thread  $thread
      * @return mixed
      */
     public function destroy($channel, Thread $thread)
@@ -150,8 +150,8 @@ class ThreadsController extends Controller
     /**
      * Fetch all relevant threads.
      *
-     * @param Channel       $channel
-     * @param ThreadFilters $filters
+     * @param  Channel  $channel
+     * @param  ThreadFilters  $filters
      * @return mixed
      */
     protected function getThreads(Channel $channel, ThreadFilters $filters)
