@@ -23,8 +23,8 @@ class ThreadWasUpdated extends Notification
     /**
      * Create a new notification instance.
      *
-     * @param \App\Thread $thread
-     * @param \App\Reply  $reply
+     * @param  \App\Thread  $thread
+     * @param  \App\Reply  $reply
      */
     public function __construct($thread, $reply)
     {

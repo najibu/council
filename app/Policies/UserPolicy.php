@@ -12,8 +12,8 @@ class UserPolicy
     /**
      * Determine whether the user can update the given profile.
      *
-     * @param  \App\User $signedInUser
-     * @param  \App\User $user
+     * @param  \App\User  $signedInUser
+     * @param  \App\User  $user
      * @return bool
      */
     public function update(User $signedInUser, User $user)
