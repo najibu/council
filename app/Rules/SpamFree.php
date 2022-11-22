@@ -2,8 +2,8 @@
 
 namespace App\Rules;
 
-use Exception;
 use App\Inspections\Spam;
+use Exception;
 
 class SpamFree
 {
