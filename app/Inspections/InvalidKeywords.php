@@ -18,7 +18,8 @@ class InvalidKeywords
     /**
      * Detect spam.
      *
-     * @param  string $body
+     * @param  string  $body
+     *
      * @throws \Exception
      */
     public function detect($body)

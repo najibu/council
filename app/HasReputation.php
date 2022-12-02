@@ -19,7 +19,7 @@ trait HasReputation
     /**
      * Award reputation points to the model.
      *
-     * @param  string $action
+     * @param  string  $action
      */
     public function gainReputation($action)
     {
@@ -29,7 +29,7 @@ trait HasReputation
     /**
      * Reduce reputation points for the model.
      *
-     * @param  string $action
+     * @param  string  $action
      */
     public function loseReputation($action)
     {
