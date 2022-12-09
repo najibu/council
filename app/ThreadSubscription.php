@@ -37,7 +37,7 @@ class ThreadSubscription extends Model
     /**
      * Notify the related user that the thread was updated.
      *
-     * @param \App\Reply $reply
+     * @param  \App\Reply  $reply
      */
     public function notify($reply)
     {
