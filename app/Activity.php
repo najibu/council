@@ -26,7 +26,7 @@ class Activity extends Model
     /**
      * Fetch an activity feed for the given user.
      *
-     * @param  User $user
+     * @param  User  $user
      * @param  int  $take
      * @return \Illuminate\Database\Eloquent\Collection;
      */
