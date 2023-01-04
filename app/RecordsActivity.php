@@ -37,7 +37,7 @@ trait RecordsActivity
     /**
      * Record new activity for the model.
      *
-     * @param string $event
+     * @param  string  $event
      */
     protected function recordActivity($event)
     {
@@ -60,7 +60,7 @@ trait RecordsActivity
     /**
      * Determine the activity type.
      *
-     * @param  string $event
+     * @param  string  $event
      * @return string
      */
     protected function getActivityType($event)
