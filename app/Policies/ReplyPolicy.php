@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\User;
 use App\Reply;
+use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ReplyPolicy
@@ -14,7 +14,7 @@ class ReplyPolicy
      * Determine if the authenticated user has permission to update a reply.
      *
      * @param  User  $user
-     * @param  Reply $reply
+     * @param  Reply  $reply
      * @return bool
      */
     public function update(User $user, Reply $reply)
